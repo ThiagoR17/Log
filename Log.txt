@@ -1,0 +1,4 @@
+jun. 12, 2023 11:55:10 PM Loggerex main
+INFO: Realizando o login do user: usuario@gmail.com
+jun. 12, 2023 11:55:10 PM Loggerex main
+INFO: Login bem sucedido para o user: usuario@gmail.com
