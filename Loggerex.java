@@ -1,63 +1,47 @@
-
 import java.util.logging.*;
 import java.util.logging.Level;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
 
+
 public class Loggerex {
     private static final Logger logger = Logger.getLogger(Loggerex.class.getName());
 
     public static void main(String[] args) {
 
-      if(args.length !=2){
-        System.out.println("Inciando o Log: <email> <senha>");
-        return;
-      }
-      //Recebendo info de outra aplicação via linha de comando
-      String email = args[0];
-      String password = args[1];
+        if (args.length != 2) {
+            System.out.println("Inciando o Log:");
+            return;
+        }
+        String comentario = args[0];
+        try {
+            // Armazenando o log no arquivo log.txt
+            FileHandler fileHandler = new FileHandler("log.txt");
+            fileHandler.setLevel(Level.ALL);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // Armazenando o log no arquivo log.txt
-                    FileHandler fileHandler = new FileHandler("log.txt");
-                    fileHandler.setLevel(Level.ALL);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
 
-                    SimpleFormatter formatter = new SimpleFormatter();
-                    fileHandler.setFormatter(formatter);
+            logger.addHandler(fileHandler);
 
-                    logger.addHandler(fileHandler);
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setLevel(Level.ALL);
 
-                    ConsoleHandler consoleHandler = new ConsoleHandler();
-                    consoleHandler.setLevel(Level.ALL);
+            logger.addHandler(consoleHandler);
 
-                    logger.addHandler(consoleHandler);
+            logger.info("Usuario " + comentario);
+            
 
-                    String email = "usuario@gmail.com";
-                    String password = "Senha3214";
+            boolean resultado = logger(comentario);
+        
 
-                    logger.info("Realizando o login do usuário: " + email);
-                    Thread.sleep(3000);
-
-                    if (login(email, password)) {
-                        logger.info("Login bem sucedido para o usuário: " + email + "\n");
-                    } else {
-                        logger.severe("Falha ao fazer login para o usuário: " + email + "\n");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private static boolean login(String email, String password) {
-        return true;
+    private static boolean logger(String comentario) {
+      return true;
     }
 }
-      
